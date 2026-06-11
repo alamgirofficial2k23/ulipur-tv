@@ -1,0 +1,104 @@
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --bg-deep: #080c12;
+  --bg-panel: #0d1117;
+  --bg-card: #111820;
+  --bg-hover: #161e2a;
+  --border: #1e2d3d;
+  --border-bright: #2a3f57;
+  --accent: #e63946;
+  --accent-glow: rgba(230, 57, 70, 0.25);
+  --accent2: #f4a261;
+  --text-primary: #e8edf3;
+  --text-secondary: #8a9bb0;
+  --text-muted: #4a5a6b;
+  --live-green: #22c55e;
+  --font-display: 'Bebas Neue', sans-serif;
+  --font-body: 'DM Sans', sans-serif;
+  --radius: 10px;
+  --radius-sm: 6px;
+  --transition: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+html, body, #root {
+  height: 100%;
+  background: var(--bg-deep);
+  color: var(--text-primary);
+  font-family: var(--font-body);
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+body { overflow: hidden; }
+
+::-webkit-scrollbar { width: 4px; height: 4px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--border-bright); border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover { background: var(--text-muted); }
+
+button { font-family: var(--font-body); cursor: pointer; border: none; outline: none; }
+input, textarea { font-family: var(--font-body); outline: none; }
+a { text-decoration: none; color: inherit; }
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes pulse-dot {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.5; transform: scale(0.8); }
+}
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+@keyframes slideIn {
+  from { opacity: 0; transform: translateX(-10px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+.fade-in { animation: fadeIn 0.3s ease forwards; }
+
+/* ── Mobile optimizations ────────────────────────────────── */
+
+/* Prevent pull-to-refresh & bounce on iOS */
+html {
+  overscroll-behavior: none;
+  -webkit-text-size-adjust: 100%;
+}
+
+/* iOS Safari — use dvh so bottom bar doesn't cover content */
+@supports (height: 100dvh) {
+  html, body, #root { height: 100dvh; }
+}
+
+/* Make scrollable areas smooth on iOS */
+* {
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Hide scrollbars globally on mobile */
+@media (max-width: 767px) {
+  ::-webkit-scrollbar { display: none; }
+}
+
+/* Bigger tap targets for all buttons on mobile */
+@media (max-width: 767px) {
+  button { min-height: 36px; }
+}
+
+/* Admin panel — responsive sidebar → top nav on mobile */
+@media (max-width: 640px) {
+  .admin-sidebar-hidden { display: none !important; }
+  .admin-content-full   { padding: 16px !important; }
+}
+
+/* Prevent text selection on interactive elements */
+button, [role="button"] {
+  -webkit-user-select: none;
+  user-select: none;
+}
